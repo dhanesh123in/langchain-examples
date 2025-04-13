@@ -22,7 +22,7 @@ Following is an example LangSmith [trace](https://smith.langchain.com/public/34e
     % export TAVILY_API_KEY=<add key here>
     % export LANGSMITH_API_KEY=<add key here>
    ```
-   You can get this keys after you create accounts in [Tavily](https://www.tavily.com) and [LangSmith](https://www.langchain.com/langsmith)
+   You can get these keys after you create accounts in [Tavily](https://www.tavily.com) and [LangSmith](https://www.langchain.com/langsmith)
 3. Install Ollama and pull the required LLM model "llama3.2:3b-instruct-fp16"
 4. Run postgres in a docker container with following command
     ```
