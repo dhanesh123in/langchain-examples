@@ -5,7 +5,7 @@
 ![sparkle](/assets/Screenshot%20from%202025-04-13%2016-04-42.png)
 
 
-I implement the following Adaptive RAG that combines LLM-based routing, Vectorstore, LLM-based response generation, LLM-based hallucination grader and LLM-based evaluation of the generation
+I implement the following Adaptive RAG that combines LLM-based routing, Vectorstore, LLM-based retrieval grader, LLM-based response generation, LLM-based hallucination grader and LLM-based evaluation of the generation
 ![sparkle](/assets/adaptive_rag_flow.png)
 
 
