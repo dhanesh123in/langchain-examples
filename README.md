@@ -9,7 +9,8 @@ I implement the following Adaptive RAG that combines LLM-based routing, Vectorst
 ![sparkle](/assets/adaptive_rag_flow.png)
 
 
-Following is an example LangSmith [trace] (https://smith.langchain.com/public/34e3de35-eb70-42c8-a227-adfe57dbad69/r)
+Following is an example LangSmith [trace](https://smith.langchain.com/public/34e3de35-eb70-42c8-a227-adfe57dbad69/r)
+
 ![sparkle](/assets/Screenshot%20from%202025-04-13%2016-09-08.png)
 
 
