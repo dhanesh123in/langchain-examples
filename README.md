@@ -5,7 +5,7 @@
 We implement the following Adaptive RAG that combines LLM-based routing, Vectorstore, LLM-based response generation, LLM-based hallucination grader and LLM-based evaluation of the generation
 ![sparkle](/assets/adaptive_rag_flow.png)
 
-This is based on the example [here](https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_adaptive_rag_local/#llm) but a PGVector vectorstore is used here. Also `lxml` parser is used in beautiful soup, which extracts more contents than the default html parser for the population of the vectorstore.
+This is based on the example [here](https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_adaptive_rag_local/#llm) but a PGVector vectorstore is used in this example, which can be scaled as an independent service. Also `lxml` parser is used in `WebBaseLoader`, which extracts more contents than the default html parser for the population of the vectorstore.
 
 ### Instructions
 
