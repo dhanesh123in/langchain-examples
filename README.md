@@ -39,6 +39,6 @@ Following is an example LangSmith [trace](https://smith.langchain.com/public/34e
     ```
 7. Check LangSmith for traces of the run.  
 
-This is based on the example [here](https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_adaptive_rag_local/#llm) but a PGVector vectorstore is used in this example, which can be scaled as an independent service. Also `lxml` parser is used in `WebBaseLoader`, which extracts more contents than the default html parser for the population of the vectorstore.
+This is based on the example [here](https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_adaptive_rag_local/#llm) but a PGVector vectorstore is used in this example, which can be scaled independently. Also `lxml` parser is used in `WebBaseLoader`, which extracts more contents than the default html parser for the population of the vectorstore.
 
 
