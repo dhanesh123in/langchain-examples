@@ -2,16 +2,16 @@
 
 ## Adaptive RAG Q&A with LangGraph, Ollama (LLama3) and Tavily Search
 
-![sparkle](/assets/Screenshot%20from%202025-04-13%2016-04-42.png)
+![Adapative RAG Streamlit App](/assets/Screenshot%20from%202025-04-15%2011-42-04.png)
 
 
 I implement the following Adaptive RAG that combines LLM-based routing, Vectorstore, LLM-based retrieval grader, LLM-based response generation, LLM-based hallucination grader and LLM-based evaluation of the generation
-![sparkle](/assets/adaptive_rag_flow.png)
+![Adaptive RAG Workflow](/assets/adaptive_rag_flow.png)
 
 
 Following is an example LangSmith [trace](https://smith.langchain.com/public/34e3de35-eb70-42c8-a227-adfe57dbad69/r)
 
-![sparkle](/assets/Screenshot%20from%202025-04-13%2016-09-08.png)
+![Example LangSmith Run](/assets/Screenshot%20from%202025-04-13%2016-09-08.png)
 
 
 ### Instructions
@@ -39,6 +39,6 @@ Following is an example LangSmith [trace](https://smith.langchain.com/public/34e
     ```
 7. Check LangSmith for traces of the run.  
 
-This is based on the example [here](https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_adaptive_rag_local/#llm) but a PGVector vectorstore is used in this example, which can be scaled independently. Also `lxml` parser is used in `WebBaseLoader`, which extracts more contents than the default html parser for the population of the vectorstore.
+This is based on the example [here](https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_adaptive_rag_local/#llm) but a PGVector vectorstore is used in this example, which can be scaled independently. Also `lxml` parser is used in `WebBaseLoader`, which extracts more contents than the default html parser for the population of the vectorstore. I have also made some improvements in the state management in the workflow (clearing of results when retries exceeded).
 
 

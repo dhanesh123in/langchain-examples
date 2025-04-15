@@ -17,9 +17,8 @@ if st.button("Get Answer"):
         
         # Display processing information
         st.subheader("Processing Information")
-        st.write(f"**Route:** {result['route'].replace('_', ' ').title()}")
-        st.write(f"**Reason:** {result['reason']}")
         st.write(f"**Documents Used:** {result['documents_used']}")
+        st.write(f"**Documents Retrieved from RAG:** {'Yes' if result['retrieved'] else 'No'}")
         st.write(f"**Web Search Used:** {'Yes' if result['web_search_used'] else 'No'}")
         
         # Display answer

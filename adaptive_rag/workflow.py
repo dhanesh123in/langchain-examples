@@ -10,6 +10,7 @@ class GraphState(TypedDict):
     """Graph state is a dictionary that contains information we want to propagate to, and modify in, each graph node."""
     question: str  # User question
     generation: str  # LLM generation
+    retrieved: bool  # Binary decision to run web search
     web_search: str  # Binary decision to run web search
     max_retries: int  # Max number of retries for answer generation
     answers: int  # Number of answers generated
@@ -28,6 +29,7 @@ def create_workflow_graph(
     def print_state(state: GraphState):
         print("---PRINT STATE---")
         print("Length of documents: ", len(state.get("documents", [])))
+        print("Retrieved: ", state.get("retrieved", False))
         print("Web search: ", state.get("web_search", ""))
 
     def format_docs(docs):
@@ -54,7 +56,7 @@ def create_workflow_graph(
         print("---RETRIEVE---")
         question = state["question"]
         documents = retriever.invoke(question)
-        return {"documents": documents}
+        return {"documents": documents, "retrieved": True}
 
 
     def grade_documents(state: GraphState) -> dict:
@@ -172,6 +174,10 @@ def create_workflow_graph(
             print_state(state)
             return "max retries"
 
+    def clear_state(state: GraphState) -> dict:
+        return {"documents": [], "generation": ""}
+
+
     # Create workflow graph
     workflow = StateGraph(GraphState)
 
@@ -180,7 +186,7 @@ def create_workflow_graph(
     workflow.add_node("retrieve", retrieve)
     workflow.add_node("grade_documents", grade_documents)
     workflow.add_node("generate", generate)
-
+    workflow.add_node("clear_state", clear_state)
     # Build graph
     workflow.set_conditional_entry_point(
         route_question,
@@ -206,9 +212,11 @@ def create_workflow_graph(
             "not supported": "generate",
             "useful": END,
             "not useful": "websearch",
-            "max retries": END,
+            "max retries": "clear_state",
         },
     )
+
+    workflow.add_edge("clear_state", END)
 
     return workflow.compile()
 

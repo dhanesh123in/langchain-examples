@@ -56,11 +56,10 @@ class AdaptiveRAG:
         
         # Format the response
         return {
-            "route": "workflow",
-            "reason": "Used workflow graph for processing",
-            "answer": final_state["generation"].content if final_state["generation"] else "No answer generated",
-            "documents_used": len(final_state["documents"]),
-            "web_search_used": final_state["web_search"] == "Yes"
+            "answer": final_state["generation"].content if final_state.get("generation",[]) else "No answer generated",
+            "documents_used": len(final_state.get("documents", [])),
+            "web_search_used": final_state.get("web_search", "No") == "Yes",
+            "retrieved": final_state.get("retrieved", False)
         }
 
 
