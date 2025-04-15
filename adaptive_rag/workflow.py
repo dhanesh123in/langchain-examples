@@ -24,7 +24,12 @@ def create_workflow_graph(
     prompts: dict
 ) -> StateGraph:
     """Create the workflow graph with the provided components."""
-    
+
+    def print_state(state: GraphState):
+        print("---PRINT STATE---")
+        print("Length of documents: ", len(state.get("documents", [])))
+        print("Web search: ", state.get("web_search", ""))
+
     def format_docs(docs):
         return "\n\n".join(doc.page_content for doc in docs)
 
@@ -89,7 +94,7 @@ def create_workflow_graph(
         web_results = "\n".join([d["content"] for d in docs])
         web_results = Document(page_content=web_results)
         documents.append(web_results)
-        return {"documents": documents}
+        return {"documents": documents, "web_search": "Yes"}
 
 
     def generate(state: GraphState) -> dict:
@@ -111,9 +116,11 @@ def create_workflow_graph(
         web_search = state["web_search"]
         if web_search == "Yes":
             print("---DECISION: NOT ALL DOCUMENTS ARE RELEVANT TO QUESTION, INCLUDE WEB SEARCH---")
+            print_state(state)
             return "websearch"
         else:
             print("---DECISION: GENERATE---")
+            print_state(state)
             return "generate"
 
     def grade_generation(state: GraphState) -> str:
@@ -146,18 +153,23 @@ def create_workflow_graph(
             grade = json.loads(result.content)["binary_score"]
             if grade == "yes":
                 print("---DECISION: GENERATION ADDRESSES QUESTION---")
+                print_state(state)
                 return "useful"
             elif state["loop_step"] <= max_retries:
                 print("---DECISION: GENERATION DOES NOT ADDRESS QUESTION---")
+                print_state(state)
                 return "not useful"
             else:
                 print("---DECISION: MAX RETRIES REACHED---")
+                print_state(state)
                 return "max retries"
         elif state["loop_step"] <= max_retries:
             print("---DECISION: GENERATION IS NOT GROUNDED IN DOCUMENTS, RE-TRY---")
+            print_state(state)
             return "not supported"
         else:
             print("---DECISION: MAX RETRIES REACHED---")
+            print_state(state)
             return "max retries"
 
     # Create workflow graph
